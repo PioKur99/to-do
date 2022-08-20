@@ -1,6 +1,7 @@
 package pl.polsl.ToDoBackendApp.ToDo;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table
@@ -18,6 +19,9 @@ public class ToDo {
     private Long id;
     private String text;
     private Boolean done;
+    private LocalDate creationDate;
+    private LocalDate dueDate;
+
 
     public Long getId() {
         return id;
@@ -43,19 +47,39 @@ public class ToDo {
         this.done = done;
     }
 
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
     public ToDo() {
 
     }
 
-    public ToDo(String text, Boolean done) {
+    public ToDo(String text, Boolean done, LocalDate dueDate) {
         this.text = text;
         this.done = done;
+        this.dueDate = dueDate;
+        this.creationDate = LocalDate.now();
     }
 
-    public ToDo(Long id, String text, Boolean done) {
+    public ToDo(Long id, String text, Boolean done, LocalDate creationDate, LocalDate dueDate) {
         this.id = id;
         this.text = text;
         this.done = done;
+        this.creationDate = creationDate;
+        this.dueDate = dueDate;
     }
 
     @Override
@@ -64,6 +88,8 @@ public class ToDo {
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", done=" + done +
+                ", creationDate=" + creationDate +
+                ", dueDate=" + dueDate +
                 '}';
     }
 }
