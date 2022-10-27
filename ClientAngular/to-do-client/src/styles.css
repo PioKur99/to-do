@@ -32,9 +32,16 @@ body {
   margin-bottom: 20px;
 }
 
-.toast {
-  display: block !important;
-  position: absolute;
-  top: 30px;
-  right: 30px;
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  color: rgb(38, 58, 100);
+}
+
+::-webkit-scrollbar-track {
+  background-color: #F1F3F5;
 }

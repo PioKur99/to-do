@@ -9,7 +9,8 @@ import { mockTodos } from 'src/assets/mock-to-dos';
   styleUrls: ['./to-dos.component.css']
 })
 export class ToDosComponent implements OnInit {
-  todosData: ToDo[] = []
+  todosData: ToDo[] = [];
+  isAddViewVisible = false;
   constructor(private toDoService: TodoService) {}
 
   ngOnInit(): void {
@@ -17,6 +18,10 @@ export class ToDosComponent implements OnInit {
       this.todos = response;
     })*/
     this.todosData = mockTodos;
+  }
+
+  handleAddToDoClicked(value: boolean) {
+    this.isAddViewVisible = value
   }
 
 }

@@ -28,5 +28,12 @@ export const mockTodos: ToDo[] = [
         done: true,
         creationDate: '27.10.2022',
         dueDate: '01.10.2023'
+    },
+    {
+        id: '5',
+        text: 'Pisać pracę',
+        done: true,
+        creationDate: '27.10.2022',
+        dueDate: '01.10.2023'
     }
 ]

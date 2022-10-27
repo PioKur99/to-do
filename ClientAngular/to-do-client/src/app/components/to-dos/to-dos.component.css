@@ -1,0 +1,11 @@
+.data {
+    overflow-y: auto;
+}
+
+.tall {
+    max-height: 65vh;
+}
+
+.short {
+    max-height: 40vh;
+}
