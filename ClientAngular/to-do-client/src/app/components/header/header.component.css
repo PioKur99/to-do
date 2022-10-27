@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+}
+
+.title {
+    color: rgb(38, 58, 100);
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 10px;
+}
