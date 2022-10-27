@@ -1,11 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="loading">
-    <div class="spinner-border" role="status">
-    </div>
-  </ng-container>
-  <ng-container *ngIf="!loading">
-    <div *ngFor="let item of todos" class="alert alert-primary" role="alert">
-      {{item.text}}
-    </div>
-  </ng-container>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
 </div>

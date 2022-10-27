@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { mockTodos } from 'src/assets/mock-to-dos';
 import { ToDo } from './models/to-do-model';
 import { TodoService } from './services/todo.service';
 
@@ -7,16 +8,4 @@ import { TodoService } from './services/todo.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  loading = false;
-  todos: ToDo[] = []
-  constructor(private toDoService: TodoService) {}
-
-  ngOnInit(): void {
-    this.loading = true;
-    this.toDoService.getToDos().subscribe(data => {
-      this.todos = data;
-      this.loading = false;
-    })
-  }
-}
+export class AppComponent {}
