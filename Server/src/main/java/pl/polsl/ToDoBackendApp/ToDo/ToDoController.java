@@ -34,9 +34,8 @@ public class ToDoController {
     @PutMapping(path = "{toDoId}")
     public void updateToDo(
             @PathVariable("toDoId") Long id,
-            @RequestParam(required = false) Boolean done,
-            @RequestParam(required = false) LocalDate dueDate
+            @RequestParam(required = false) Boolean done
     ) {
-        toDoService.updateToDo(id, done, dueDate);
+        toDoService.updateToDo(id, done);
     }
 }

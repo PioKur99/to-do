@@ -43,16 +43,14 @@ public class ToDoService {
     }
 
     @Transactional
-    public void updateToDo(Long id, Boolean done, LocalDate dueDate) {
+    public void updateToDo(Long id, Boolean done) {
+        System.out.println(id);
+        System.out.println(done);
         ToDo item = toDoRepository.findById(id).
                 orElseThrow(() -> new IllegalStateException("Nie znaleziono zadania o id" + id + "."));
 
         if(!Objects.equals(item.getDone(), done)) {
             item.setDone(done);
-        }
-
-        if(dueDate != null && !Objects.equals(item.getDueDate(), dueDate)) {
-            item.setDueDate(dueDate);
         }
 
     }

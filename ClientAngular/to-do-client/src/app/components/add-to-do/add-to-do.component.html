@@ -14,10 +14,13 @@
         name="dueDate"
         [(ngModel)]="dueDate"
         id="dueDate"
-        placeholder="Termin wykonania"
+        placeholder="Obsługiwany format: yyyy-mm-dd"
         class="form-control"
       />
-    <button (click)="onSubmit()" class="btn btn-dark block">Dodaj</button>
+    <button (click)="onSubmit()" class="btn btn-dark block">
+      <span *ngIf="loading | async" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="(loading | async) === false">Dodaj</span>
+    </button>
     <div *ngIf="showAlert" [class]="alertType" role="alert">
         {{alertMessage}}
     </div>

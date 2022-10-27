@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, finalize, first, Observable } from 'rxjs';
 import { ToDo } from '../models/to-do-model';
@@ -10,6 +10,8 @@ export class TodoService {
 
   toDoData: BehaviorSubject<ToDo[]> = new BehaviorSubject<ToDo[]>([]);
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  createLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  deleteLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   
   constructor(private http: HttpClient) { }
 
@@ -25,5 +27,13 @@ export class TodoService {
 
   createToDo(data: ToDo) {
     return this.http.post("http://localhost:8080/todo", data)
+  }
+
+  deleteToDo(id: string) {
+    return this.http.delete(`http://localhost:8080/todo/${id}`)
+  }
+
+  updateToDo(id: string, value: boolean) {
+    return this.http.put(`http://localhost:8080/todo/${id}`, {params: {done: value}});
   }
 }

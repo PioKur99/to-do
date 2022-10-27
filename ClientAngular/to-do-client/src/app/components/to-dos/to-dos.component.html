@@ -1,6 +1,9 @@
 <app-header (addClicked)="handleAddToDoClicked($event)"></app-header>
+<div *ngIf="showAlert" [class]="alertType" role="alert">
+  {{alertMessage}}
+</div>
 <div *ngIf="loading | async" class="d-flex justify-content-center">
-    <div class="spinner-border" role="status">
+    <div class="spinner-border" style="width: 3rem; height: 3rem; margin-top: 3rem;" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
@@ -9,6 +12,10 @@
         <div *ngIf="!data.length" class="alert alert-warning" role="alert">
             Brak danych!
         </div>
-        <app-to-do-item *ngFor="let item of data" [toDo]="item"></app-to-do-item>
+        <app-to-do-item 
+        *ngFor="let item of data" 
+        [toDo]="item"
+        (itemModified)="displayAlert($event)"
+        ></app-to-do-item>
     </div>
 </ng-container>
