@@ -67,6 +67,13 @@ public class ToDo {
 
     }
 
+    public ToDo(String text, LocalDate dueDate) {
+        this.text = text;
+        this.dueDate = dueDate;
+        this.done = false;
+        this.creationDate = LocalDate.now();
+    }
+
     public ToDo(String text, Boolean done, LocalDate dueDate) {
         this.text = text;
         this.done = done;

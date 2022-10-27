@@ -1,4 +1,14 @@
 <app-header (addClicked)="handleAddToDoClicked($event)"></app-header>
-<div class="data" [ngClass]="isAddViewVisible? 'short' : 'tall'">
-    <app-to-do-item *ngFor="let item of todosData" [toDo]="item"></app-to-do-item>
-</div>
+<div *ngIf="loading | async" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+<ng-container *ngIf="(loading | async) === false">
+    <div *ngIf="todosData | async as data" class="data" [ngClass]="isAddViewVisible? 'short' : 'tall'">
+        <div *ngIf="!data.length" class="alert alert-warning" role="alert">
+            Brak danych!
+        </div>
+        <app-to-do-item *ngFor="let item of data" [toDo]="item"></app-to-do-item>
+    </div>
+</ng-container>

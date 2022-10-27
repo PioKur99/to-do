@@ -14,9 +14,9 @@ public class ToDoConfig {
     @Bean
     CommandLineRunner commandLineRunner(ToDoRepository repository) {
         return args -> {
-            ToDo sampleToDo = new ToDo("Robić backend", false, LocalDate.of(2023, Month.AUGUST, 1));
-            ToDo sampleToDo_1 = new ToDo("Robić frontend", false, LocalDate.of(2023, Month.AUGUST, 1));
-            ToDo sampleToDo_2 = new ToDo("Pojechac do Bystrej", false, LocalDate.of(2022, Month.AUGUST, 1));
+            ToDo sampleToDo = new ToDo("Robić backend", false, LocalDate.of(2023, Month.AUGUST, 3));
+            ToDo sampleToDo_1 = new ToDo("Robić frontend", false, LocalDate.of(2023, Month.AUGUST, 2));
+            ToDo sampleToDo_2 = new ToDo("Pojechac do Bystrej", true, LocalDate.of(2022, Month.AUGUST, 1));
             List<ToDo> toDoList = new ArrayList<ToDo>();
             toDoList.add(sampleToDo);
             toDoList.add(sampleToDo_1);
