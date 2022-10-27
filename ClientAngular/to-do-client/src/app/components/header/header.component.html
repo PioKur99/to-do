@@ -19,4 +19,4 @@
         {{buttonText}}
     </button>
 </header>
-<app-add-to-do *ngIf="showAddView"></app-add-to-do>
+<app-add-to-do *ngIf="showAddView" (onAddToDo)="handleAddClick()"></app-add-to-do>

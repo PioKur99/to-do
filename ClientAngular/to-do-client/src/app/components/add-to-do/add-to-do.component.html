@@ -1,1 +1,24 @@
-<p>add-to-do works!</p>
+<form class="add-form">
+      <label for="text">Treść</label>
+      <input
+        type="text"
+        name="text"
+        [(ngModel)]="text"
+        id="text"
+        placeholder="Treść zadania"
+        class="form-control"
+      />
+      <label for="dueDate">Termin wykonania</label>
+      <input
+        type="text"
+        name="dueDate"
+        [(ngModel)]="dueDate"
+        id="dueDate"
+        placeholder="Termin wykonania"
+        class="form-control"
+      />
+    <button (click)="onSubmit()" class="btn btn-dark block">Dodaj</button>
+    <div *ngIf="showAlert" [class]="alertType" role="alert">
+        {{alertMessage}}
+    </div>
+</form>
