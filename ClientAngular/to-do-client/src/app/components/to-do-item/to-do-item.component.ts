@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { finalize, first } from 'rxjs';
 import { Alert } from 'src/app/models/alert-content-model';
 import { ToDo } from 'src/app/models/to-do-model';

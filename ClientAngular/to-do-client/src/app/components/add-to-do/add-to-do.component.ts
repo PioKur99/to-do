@@ -24,6 +24,7 @@ export class AddToDoComponent {
   onSubmit() {
     if (!this.text || !this.dueDate) {
       this._showAlert('Proszę uzupełnić wszystkie pola!', 'alert alert-danger');
+      this.toDoService.noticeAlertShow();
     } else {
       this.toDoService.createLoading.next(true);
       const newToDo: ToDo = {
@@ -36,10 +37,12 @@ export class AddToDoComponent {
         ).subscribe(
         next => {
           this._showAlert('Dane zostały zapisane.', 'alert alert-success', newToDo);
+          this.toDoService.noticeAlertShow();
           this.toDoService.getToDos();
         },
         error => {
           this._showAlert('Wystąpił błąd!', 'alert alert-danger');
+          this.toDoService.noticeAlertShow();
         }
       )
     }

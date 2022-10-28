@@ -12,6 +12,7 @@ export class TodoService {
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   createLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   deleteLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isAlertShown: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   
   constructor(private http: HttpClient) { }
 
@@ -34,6 +35,11 @@ export class TodoService {
   }
 
   updateToDo(id: string, value: boolean) {
-    return this.http.put(`http://localhost:8080/todo/${id}`, {params: {done: value}});
+    return this.http.put(`http://localhost:8080/todo/${id}`, {}, {params: {done: value}});
+  }
+
+  noticeAlertShow() {
+    this.isAlertShown.next(true);
+    setTimeout(() => this.isAlertShown.next(false), 2000);
   }
 }

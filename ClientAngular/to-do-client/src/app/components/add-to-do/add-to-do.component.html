@@ -19,7 +19,7 @@
       />
     <button (click)="onSubmit()" class="btn btn-dark block">
       <span *ngIf="loading | async" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <span *ngIf="(loading | async) === false">Dodaj</span>
+      <span *ngIf="(loading | async) === false">Zapisz</span>
     </button>
     <div *ngIf="showAlert" [class]="alertType" role="alert">
         {{alertMessage}}

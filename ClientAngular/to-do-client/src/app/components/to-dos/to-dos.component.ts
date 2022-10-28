@@ -13,6 +13,7 @@ import { mockTodos } from 'src/assets/mock-to-dos';
 export class ToDosComponent implements OnInit {
   todosData: Observable<ToDo[]>;
   loading: Observable<boolean>;
+  isAddAlertVisible: Observable<boolean>;
   isAddViewVisible = false;
   alertMessage: string = '';
   alertType: string = ''
@@ -20,6 +21,7 @@ export class ToDosComponent implements OnInit {
   constructor(private toDoService: TodoService) {
     this.todosData = this.toDoService.toDoData;
     this.loading = this.toDoService.loading;
+    this.isAddAlertVisible = this.toDoService.isAlertShown;
   }
 
   ngOnInit(): void {

@@ -8,7 +8,15 @@
     </div>
   </div>
 <ng-container *ngIf="(loading | async) === false">
-    <div *ngIf="todosData | async as data" class="data" [ngClass]="isAddViewVisible? 'short' : 'tall'">
+    <div 
+    *ngIf="todosData | async as data" 
+    class="data" 
+    [ngClass]="{
+          'large': !isAddViewVisible && !showAlert,
+          'big': !isAddViewVisible && showAlert,
+          'medium': isAddViewVisible && !showAlert,
+          'small': isAddViewVisible && ((isAddAlertVisible | async) || showAlert)
+        }">
         <div *ngIf="!data.length" class="alert alert-warning" role="alert">
             Brak danych!
         </div>

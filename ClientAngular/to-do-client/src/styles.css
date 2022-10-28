@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
+@keyframes transition {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,6 +33,11 @@ body {
   border-radius: 5px;
 }
 
+app-to-dos, app-add-to-do, app-about, app-to-do-item, .alert{
+  animation: transition .5s;
+}
+
+
 .btn {
   padding: 8px 16px;
   font-size: 15px;
@@ -30,18 +46,4 @@ body {
 
 .form-control {
   margin-bottom: 20px;
-}
-
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  color: rgb(38, 58, 100);
-}
-
-::-webkit-scrollbar-track {
-  background-color: #F1F3F5;
 }

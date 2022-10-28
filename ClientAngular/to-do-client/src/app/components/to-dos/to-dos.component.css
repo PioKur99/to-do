@@ -2,10 +2,27 @@
     overflow-y: auto;
 }
 
-.tall {
+.data {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+  }
+
+.data::-webkit-scrollbar { 
+    display: none; 
+}
+
+.large {
     max-height: 65vh;
 }
 
-.short {
-    max-height: 40vh;
+.big {
+    max-height: 60vh;
+}
+
+.medium {
+    max-height: 45vh;
+}
+
+.small {
+    max-height: 37vh;
 }
