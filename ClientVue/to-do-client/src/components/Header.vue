@@ -1,0 +1,58 @@
+<template>
+    <header>
+    <h1 class="title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-clipboard2-check-fill icon" viewBox="0 0 16 16">
+            <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z"/>
+            <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5Zm6.769 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+          </svg>
+        {{ headerTitle }}
+    </h1>
+    <button @click="handleAddClick()" :class="showAddView ? 'btn btn-danger' : 'btn btn-success'">
+        <svg v-if="!showAddView" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+        </svg>
+        <svg v-if="showAddView" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+        </svg>
+        {{ buttonText }}
+    </button>
+</header>
+</template>
+
+<script>
+export default {
+  name: 'HeaderComponent',
+  data() {
+    return {
+        headerTitle: 'Do Zrobienia',
+        buttonText: 'Dodaj',
+        showAddView: false
+    }
+  },
+  methods: {
+    handleAddClick() {
+        this.showAddView = !this.showAddView;
+        this.buttonText = this.showAddView ? 'Anuluj' : 'Dodaj';
+    }
+  }
+}
+</script>
+
+<style scoped>
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        color: rgb(38, 58, 100);
+        display: flex;
+        align-items: center;
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
+</style>
