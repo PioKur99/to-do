@@ -17,10 +17,13 @@
         {{ buttonText }}
     </button>
 </header>
+<AddToDoComponent v-if="showAddView" />
 </template>
 
 <script>
+import AddToDoComponent from './AddToDo.vue'
 export default {
+  components: { AddToDoComponent },
   name: 'HeaderComponent',
   data() {
     return {
