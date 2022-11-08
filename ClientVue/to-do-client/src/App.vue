@@ -1,12 +1,14 @@
 <template>
   <HeaderComponent />
+  <FooterComponent />
 </template>
 
 <script>
 import HeaderComponent from './components/Header.vue'
+import FooterComponent from './components/Footer.vue'
 export default {
   name: 'App',
-  components: { HeaderComponent }
+  components: { HeaderComponent, FooterComponent }
 }
 </script>
 
@@ -59,5 +61,10 @@ body {
 
 .form-control {
   margin-bottom: 20px;
+}
+
+footer {
+    position: absolute;
+    bottom: 10vh
 }
 </style>
