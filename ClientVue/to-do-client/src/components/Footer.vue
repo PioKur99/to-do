@@ -27,12 +27,13 @@ export default {
         if(window.location.pathname.includes('about')) {
             this.buttonText = 'Informacje'
             this.showBackIcon = false;
+            this.$router.push('/')
         } else {
-        this.buttonText = 'Powrót'
-        this.showBackIcon = true;
+            this.buttonText = 'Powrót'
+            this.showBackIcon = true;
+            this.$router.push('/about')
         }
     }
   }
 }
-
 </script>

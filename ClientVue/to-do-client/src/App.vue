@@ -1,15 +1,14 @@
 <template>
-  <HeaderComponent />
   <router-view></router-view>
   <FooterComponent />
 </template>
 
 <script>
-import HeaderComponent from './components/Header.vue'
+
 import FooterComponent from './components/Footer.vue'
 export default {
   name: 'App',
-  components: { HeaderComponent, FooterComponent }
+  components: { FooterComponent }
 }
 </script>
 
@@ -49,9 +48,9 @@ body {
   border-radius: 5px;
 }
 
-/*app-to-dos, app-add-to-do, app-about, app-to-do-item, .alert{
+form, .about, .alert{
   animation: transition .5s;
-}*/
+}
 
 
 .btn {

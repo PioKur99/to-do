@@ -1,5 +1,5 @@
 <template>
-    <div class="add-form">
+    <form @submit.prevent="onSubmit" class="add-form">
       <label for="text">Treść</label>
       <input
         type="text"
@@ -18,14 +18,14 @@
         class="form-control"
         v-model="dueDate"
       />
-    <button @click="onSubmit()" class="btn btn-dark block">
+    <button @click="onSubmit" class="btn btn-dark block">
       <span v-if="createLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       <span v-if="!createLoading">Zapisz</span>
     </button>
     <div v-if="showAlert" :class="alertType" role="alert">
         {{alertMessage}}
     </div>
-</div>
+  </form>
 </template>
 
 <script>
@@ -64,6 +64,7 @@ export default {
     })
     .catch(() => {
         this._showAlert('Wystąpił błąd!', 'alert alert-danger', {});
+        this.createLoading = false;
     })
     .then((response) => {
         if(!response.ok) {

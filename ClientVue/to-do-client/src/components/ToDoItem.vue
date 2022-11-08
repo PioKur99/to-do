@@ -1,0 +1,60 @@
+<template>
+
+</template>
+
+<script>
+
+</script>
+
+<style>
+.todo {
+    border: 1px solid #DEE2E6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    height: 100px;
+    background: #f4f4f4;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    transition: .2s;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.todo:hover {
+    background-color: #f0f5ff;
+}
+
+.done {
+    border-left: 5px solid #198754;
+}
+
+.not-done {
+    border-left: 5px solid #dc3545;
+}
+
+.delete-icon {
+    color: #dc3545;
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+}
+
+.wide {
+    min-width: 400px;
+}
+
+.form-check {
+    margin-bottom: 20px;;
+    margin-left: 80px;
+}
+
+.form-check-input:hover {
+    cursor: pointer;
+}
+</style>
