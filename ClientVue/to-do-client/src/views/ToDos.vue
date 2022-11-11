@@ -9,15 +9,19 @@
         </div>
     </div>
     <div v-if="!loading" class="data">
-        <pre>{{todosData}}</pre>
+        <div v-if="!todosData.length" class="alert alert-warning" role="alert">
+            Brak danych!
+        </div>
+        <ToDoItem v-for="item in todosData" :key="item.id" :toDo="item" />
     </div>
 </template>
 
 <script>
 import HeaderComponent from '../components/Header.vue'
+import ToDoItem from '../components/ToDoItem.vue'
 export default {
     name: 'ToDosComponent',
-    components: { HeaderComponent },
+    components: { HeaderComponent, ToDoItem },
     data() {
         return {
             todosData: [],

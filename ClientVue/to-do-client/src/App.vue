@@ -48,7 +48,7 @@ body {
   border-radius: 5px;
 }
 
-form, .about, .alert{
+form, .about, .alert, .todo{
   animation: transition .5s;
 }
 

@@ -1,9 +1,60 @@
 <template>
-
+    <div class="todo" :class="{'done': toDo.done, 'not-done': !toDo.done}">
+        <div class="content">
+            <span>{{toDo.text}}</span>
+            <svg v-if="!deleteLoading" @click="handleDelete(toDo.id)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill delete-icon" viewBox="0 0 16 16">
+                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+            </svg>
+            <div v-if="deleteLoading" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content wide">
+                <span>Data utworzenia: {{toDo.creationDate}}</span>
+                <span>Termin: {{toDo.dueDate}}</span>
+            </div>
+            <div v-if="!updateLoading" class="form-check">
+                <input class="form-check-input" type="checkbox" v-model="checkboxValue" @click="handleCheckBoxClick(toDo.id)">
+            </div>
+            <div v-if="updateLoading" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-
+export default {
+    name: 'ToDoItem',
+    props: {
+        toDo: {
+            text: String,
+            dueDate: String,
+            id: String,
+            done: Boolean,
+            creationDate: String
+        }
+    },
+    methods: {
+        handleCheckBoxClick(id) {
+            console.log(this.checkboxValue, id);
+        },
+        handleDelete(id) {
+            console.log(id);
+        }
+    },
+    data() {
+        return {
+            deleteLoading: false,
+            updateLoading: false,
+            checkboxValue: false
+        }
+    },
+    created() {
+        this.checkboxValue = this.toDo.done
+    }
+}
 </script>
 
 <style>
