@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { mockTodos } from 'src/assets/mock-to-dos';
-import { ToDo } from './models/to-do-model';
-import { TodoService } from './services/todo.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

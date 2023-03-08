@@ -24,12 +24,12 @@ export class ToDoItemComponent {
       this.updateLoading = true;
       this.toDoService.updateToDo(id, value).pipe(first(), finalize(() => this.updateLoading = false)).subscribe(
         next => {
-          const alert: Alert = {type: 'alert alert-success', message: 'Dane zostały zapisane.'}
+          const alert: Alert = {type: 'success', message: 'Dane zostały zapisane.'}
           this.itemModified.emit(alert);
           this.toDoService.getToDos();
         },
         error => {
-          const alert: Alert = {type: 'alert alert-danger', message: 'Wystąpił błąd!'}
+          const alert: Alert = {type: 'danger', message: 'Wystąpił błąd!'}
           this.itemModified.emit(alert);
         }
       )

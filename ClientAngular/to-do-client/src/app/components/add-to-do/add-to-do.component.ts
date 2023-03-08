@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { finalize, first, Observable } from 'rxjs';
 import { ToDo } from 'src/app/models/to-do-model';
+import { AlertService } from 'src/app/services/alert.service';
 import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
@@ -9,22 +10,17 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./add-to-do.component.css']
 })
 export class AddToDoComponent {
-  @Output() onAddToDo: EventEmitter<ToDo> = new EventEmitter();
   text: string = '';
   dueDate: string = '';
-  alertMessage: string = '';
-  alertType: string = ''
-  showAlert: boolean = false;
   loading: Observable<boolean>;
 
-  constructor(private toDoService: TodoService) {
+  constructor(private toDoService: TodoService, private alertService: AlertService) {
     this.loading = this.toDoService.createLoading;
   }
 
   onSubmit() {
     if (!this.text || !this.dueDate) {
-      this._showAlert('Proszę uzupełnić wszystkie pola!', 'alert alert-danger');
-      this.toDoService.noticeAlertShow();
+      this.alertService.open('danger', 'Proszę uzupełnić wszystkie pola!');
     } else {
       this.toDoService.createLoading.next(true);
       const newToDo: ToDo = {
@@ -34,32 +30,15 @@ export class AddToDoComponent {
       this.toDoService.createToDo(newToDo).pipe(
         first(), 
         finalize(() => this.toDoService.createLoading.next(false))
-        ).subscribe(
-        next => {
-          this._showAlert('Dane zostały zapisane.', 'alert alert-success', newToDo);
-          this.toDoService.noticeAlertShow();
+        ).subscribe({
+        next: () => {
+          this.alertService.open('success', 'Dane zostały zapisane.');
           this.toDoService.getToDos();
         },
-        error => {
-          this._showAlert('Wystąpił błąd!', 'alert alert-danger');
-          this.toDoService.noticeAlertShow();
+        error: () => {
+          this.alertService.open('danger', 'Wystąpił błąd!');
         }
-      )
+      })
     }
   }
-
-  private _showAlert(message: string, type: string, toDo?: ToDo) {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.showAlert = true;
-    setTimeout(() => {
-      this.showAlert = false
-      if(toDo) {
-        this.onAddToDo.emit(toDo);
-        this.text = '';
-        this.dueDate = '';
-      }
-    }, 2000);
-  }
-
 }

@@ -47,3 +47,12 @@ app-to-dos, app-add-to-do, app-about, app-to-do-item, .alert{
 .form-control {
   margin-bottom: 20px;
 }
+
+.top-right {
+  position: absolute;
+  width: 450px;
+  top: 20px;
+  right: 20px;
+  animation: transition .5s;
+  word-wrap: break-word;
+}

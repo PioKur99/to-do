@@ -1,7 +1,4 @@
 <app-header (addClicked)="handleAddToDoClicked($event)"></app-header>
-<div *ngIf="showAlert" [class]="alertType" role="alert">
-  {{alertMessage}}
-</div>
 <div *ngIf="loading | async" class="d-flex justify-content-center">
     <div class="spinner-border" style="width: 3rem; height: 3rem; margin-top: 3rem;" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -11,12 +8,7 @@
     <div 
     *ngIf="todosData | async as data" 
     class="data" 
-    [ngClass]="{
-          'large': !isAddViewVisible && !showAlert,
-          'big': !isAddViewVisible && showAlert,
-          'medium': isAddViewVisible && !showAlert,
-          'small': isAddViewVisible && ((isAddAlertVisible | async) || showAlert)
-        }">
+    [ngClass]="{ 'large' : !isAddViewVisible, 'medium' : isAddViewVisible }">
         <div *ngIf="!data.length" class="alert alert-warning" role="alert">
             Brak danych!
         </div>

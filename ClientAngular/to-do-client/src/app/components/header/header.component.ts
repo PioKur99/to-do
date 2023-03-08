@@ -17,6 +17,5 @@ export class HeaderComponent {
     this.buttonText = this.showAddView ? 'Anuluj' : 'Dodaj'
     this.addClicked.emit(this.showAddView)
   }
-
 }
 
