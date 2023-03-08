@@ -18,7 +18,7 @@
         class="form-control"
       />
     <button (click)="onSubmit()" class="btn btn-dark block">
-      <span *ngIf="loading | async" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <span *ngIf="(loading | async) === false">Zapisz</span>
+      <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="!loading">Zapisz</span>
     </button>
 </form>

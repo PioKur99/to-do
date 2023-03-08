@@ -1,13 +1,11 @@
-<app-header (addClicked)="handleAddToDoClicked($event)"></app-header>
-<div *ngIf="loading | async" class="d-flex justify-content-center">
+<app-header (addClicked)="handleAddToDoClicked($event)" (itemAdded)="fetchData()"></app-header>
+<div *ngIf="loading" class="d-flex justify-content-center">
     <div class="spinner-border" style="width: 3rem; height: 3rem; margin-top: 3rem;" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-<ng-container *ngIf="(loading | async) === false">
-    <div 
-    *ngIf="todosData | async as data" 
-    class="data" 
+<ng-container *ngIf="!loading">
+    <div class="data" 
     [ngClass]="{ 'large' : !isAddViewVisible, 'medium' : isAddViewVisible }">
         <div *ngIf="!data.length" class="alert alert-warning" role="alert">
             Brak danych!

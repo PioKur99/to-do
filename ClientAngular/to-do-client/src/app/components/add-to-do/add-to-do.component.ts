@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { finalize, first, Observable } from 'rxjs';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { finalize, first } from 'rxjs';
 import { ToDo } from 'src/app/models/to-do-model';
 import { AlertService } from 'src/app/services/alert.service';
 import { TodoService } from 'src/app/services/todo.service';
@@ -10,30 +10,29 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./add-to-do.component.css']
 })
 export class AddToDoComponent {
+  @Output() itemAdded: EventEmitter<void> = new EventEmitter<void>();
   text: string = '';
   dueDate: string = '';
-  loading: Observable<boolean>;
+  loading = false;
 
-  constructor(private toDoService: TodoService, private alertService: AlertService) {
-    this.loading = this.toDoService.createLoading;
-  }
+  constructor(private toDoService: TodoService, private alertService: AlertService) {}
 
   onSubmit() {
     if (!this.text || !this.dueDate) {
       this.alertService.open('danger', 'Proszę uzupełnić wszystkie pola!');
     } else {
-      this.toDoService.createLoading.next(true);
+      this.loading = true;
       const newToDo: ToDo = {
         text: this.text,
         dueDate: this.dueDate
       };
       this.toDoService.createToDo(newToDo).pipe(
         first(), 
-        finalize(() => this.toDoService.createLoading.next(false))
+        finalize(() => this.loading = false)
         ).subscribe({
         next: () => {
           this.alertService.open('success', 'Dane zostały zapisane.');
-          this.toDoService.getToDos();
+          this.itemAdded.emit();
         },
         error: () => {
           this.alertService.open('danger', 'Wystąpił błąd!');

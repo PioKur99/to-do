@@ -26,7 +26,6 @@ export class ToDoItemComponent {
         next => {
           const alert: Alert = {type: 'success', message: 'Dane zostały zapisane.'}
           this.itemModified.emit(alert);
-          this.toDoService.getToDos();
         },
         error => {
           const alert: Alert = {type: 'danger', message: 'Wystąpił błąd!'}
@@ -41,16 +40,14 @@ export class ToDoItemComponent {
       this.deleteLoading = true;
       this.toDoService.deleteToDo(id).pipe(first(), finalize(() => this.deleteLoading = false)).subscribe(
         next => {
-          const alert: Alert = {type: 'alert alert-success', message: 'Dane zostały zapisane.'}
+          const alert: Alert = {type: 'success', message: 'Dane zostały zapisane.'}
           this.itemModified.emit(alert);
-          this.toDoService.getToDos();
         },
         error => {
-          const alert: Alert = {type: 'alert alert-danger', message: 'Wystąpił błąd!'}
+          const alert: Alert = {type: 'danger', message: 'Wystąpił błąd!'}
           this.itemModified.emit(alert);
         }
       )
     }
   }
-
 }

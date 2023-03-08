@@ -7,30 +7,19 @@ import { ToDo } from '../models/to-do-model';
   providedIn: 'root'
 })
 export class TodoService {
-
-  toDoData: BehaviorSubject<ToDo[]> = new BehaviorSubject<ToDo[]>([]);
-  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  createLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  deleteLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   
   constructor(private http: HttpClient) { }
 
-  getToDos() {
-    this.loading.next(true);
-    this.http.get<ToDo[]>("http://localhost:8080/todo").pipe(
-      first(), 
-      finalize(() => {this.loading.next(false)})
-      ).subscribe((response) => {
-      this.toDoData.next(response);
-    });
+  loadToDos() {
+    return this.http.get<ToDo[]>("http://localhost:8080/todo");
   }
 
   createToDo(data: ToDo) {
-    return this.http.post("http://localhost:8080/todo", data)
+    return this.http.post("http://localhost:8080/todo", data);
   }
 
   deleteToDo(id: string) {
-    return this.http.delete(`http://localhost:8080/todo/${id}`)
+    return this.http.delete(`http://localhost:8080/todo/${id}`);
   }
 
   updateToDo(id: string, value: boolean) {
