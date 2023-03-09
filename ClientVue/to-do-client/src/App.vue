@@ -63,6 +63,15 @@ form, .about, .alert, .todo{
   margin-bottom: 20px;
 }
 
+.top-right {
+  position: absolute;
+  width: 450px;
+  top: 20px;
+  right: 20px;
+  animation: transition .5s;
+  word-wrap: break-word;
+}
+
 footer {
     position: absolute;
     bottom: 10vh

@@ -22,29 +22,28 @@
       <span v-if="createLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       <span v-if="!createLoading">Zapisz</span>
     </button>
-    <div v-if="showAlert" :class="alertType" role="alert">
-        {{alertMessage}}
-    </div>
+  
   </form>
 </template>
 
 <script>
+import AlertService from '../services/alert-service'
+import TodoService from '@/services/todo-service';
+const alertService = new AlertService();
+const toDoService = new TodoService();
 export default {
   name: 'AddToDoComponent',
   data() {
     return {
         text: '',
         dueDate: '',
-        alertMessage: '',
-        alertType: '',
-        showAlert: false,
         createLoading: false
     }
   },
   methods: {
     onSubmit() {
     if (!this.text || !this.dueDate) {
-      this._showAlert('Proszę uzupełnić wszystkie pola!', 'alert alert-danger', {});
+      alertService.open('danger', 'Proszę uzupełnić wszystkie pola!');
     } else {
       const newToDo = {
         text: this.text,
@@ -53,41 +52,18 @@ export default {
       this.createToDo(newToDo);
     }
   },
-  async createToDo(toDo) {
+  createToDo(toDo) {
     this.createLoading = true;
-     await fetch('http://localhost:8080/todo', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(toDo)
+    toDoService.createToDo(toDo).then(() => {
+      alertService.open('success', 'Dane zostały zapisane.')
+      this.createLoading = false;
+      this.$emit('onAddToDo')
     })
     .catch(() => {
-        this._showAlert('Wystąpił błąd!', 'alert alert-danger', {});
-        this.createLoading = false;
+      alertService.open('danger', 'Wystąpił błąd!')
+      this.createLoading = false;
     })
-    .then((response) => {
-        if(!response.ok) {
-            this._showAlert('Wystąpił błąd!', 'alert alert-danger', {});
-        } else {
-            this._showAlert('Dane zostały zapisane.', 'alert alert-success', toDo);
-        }
-    })
-    this.createLoading = false;
-  },
-    _showAlert(message, type, toDo) {
-        this.alertMessage = message;
-        this.alertType = type;
-        this.showAlert = true;
-        setTimeout(() => {
-        this.showAlert = false
-        if(Object.keys(toDo).length !== 0) {
-            this.$emit('onAddToDo', toDo)
-            this.text = '';
-            this.dueDate = '';
-        }
-        }, 2000);
-    }
+  }
   }
 }
 </script>

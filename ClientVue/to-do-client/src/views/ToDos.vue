@@ -8,7 +8,7 @@
         <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <div v-if="!loading" class="data">
+    <div v-if="!loading" class="data large">
         <div v-if="!todosData.length" class="alert alert-warning" role="alert">
             Brak danych!
         </div>
@@ -19,6 +19,8 @@
 <script>
 import HeaderComponent from '../components/Header.vue'
 import ToDoItem from '../components/ToDoItem.vue'
+import TodoService from '@/services/todo-service'
+const toDoService = new TodoService();
 export default {
     name: 'ToDosComponent',
     components: { HeaderComponent, ToDoItem },
@@ -48,22 +50,12 @@ export default {
             this.showAlert = false
             }, 2000);
         },
-        async getToDos() {
+        getToDos() {
             this.loading = true;
-            await fetch("http://localhost:8080/todo")
-            .catch(() => {
-                this.displayAlert('Wystąpił błąd!', 'alert alert-danger');
+            toDoService.loadToDos().then(response => {
+                this.todosData = response.data;
                 this.loading = false;
             })
-            .then((response) => response.json())
-            .then((data) => {
-                if(data.error) {
-                    this.displayAlert('Wystąpił błąd!', 'alert alert-danger');
-                } else {
-                    this.todosData = data;
-                }
-            })
-            this.loading = false;
         }
     }
 }
