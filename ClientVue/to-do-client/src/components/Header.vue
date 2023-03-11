@@ -17,7 +17,7 @@
         {{ buttonText }}
     </button>
 </header>
-<AddToDoComponent v-if="showAddView" />
+<AddToDoComponent @itemAdded="handleItemAdded()" v-if="showAddView" />
 </template>
 
 <script>
@@ -36,8 +36,13 @@ export default {
     handleAddClick() {
         this.showAddView = !this.showAddView;
         this.buttonText = this.showAddView ? 'Anuluj' : 'Dodaj';
+        this.$emit('addClicked');
+    },
+    handleItemAdded() {
+        this.$emit('itemAdded');
     }
-  }
+  },
+  emits: ['itemAdded', 'addClicked']
 }
 </script>
 

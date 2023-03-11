@@ -28,6 +28,7 @@ public class ToDoService {
 
     @PostMapping
     public void addNewToDo(@RequestBody ToDo item) {
+        item.setCreationDate(LocalDate.now());
         if(LocalDate.now().isAfter(item.getDueDate())) {
             throw new IllegalStateException("Termin wykonania zadania nie może być wcześniejszy niż obecny.");
         }

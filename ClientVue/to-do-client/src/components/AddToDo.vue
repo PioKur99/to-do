@@ -18,7 +18,7 @@
         class="form-control"
         v-model="dueDate"
       />
-    <button @click="onSubmit" class="btn btn-dark block">
+    <button class="btn btn-dark block">
       <span v-if="createLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       <span v-if="!createLoading">Zapisz</span>
     </button>
@@ -47,7 +47,8 @@ export default {
     } else {
       const newToDo = {
         text: this.text,
-        dueDate: this.dueDate
+        dueDate: this.dueDate,
+        done: false
       };
       this.createToDo(newToDo);
     }
@@ -57,14 +58,15 @@ export default {
     toDoService.createToDo(toDo).then(() => {
       alertService.open('success', 'Dane zostały zapisane.')
       this.createLoading = false;
-      this.$emit('onAddToDo')
+      this.$emit('itemAdded')
     })
     .catch(() => {
       alertService.open('danger', 'Wystąpił błąd!')
       this.createLoading = false;
     })
   }
-  }
+  },
+  emits: ['itemAdded']
 }
 </script>
 

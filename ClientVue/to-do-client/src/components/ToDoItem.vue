@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import TodoService from '@/services/todo-service'
+const toDoService = new TodoService();
 export default {
     name: 'ToDoItem',
     props: {
@@ -38,12 +40,31 @@ export default {
     },
     methods: {
         handleCheckBoxClick(id) {
-            console.log(this.checkboxValue, id);
+            this.updateLoading = true;
+            toDoService.updateToDo(id, !this.checkboxValue)
+            .then(() => {
+                this.$emit('item-modified', true);
+                this.updateLoading = false;
+            })
+            .catch(() => {
+                this.$emit('item-modified', false);
+                this.updateLoading = false;
+            })
         },
         handleDelete(id) {
-            console.log(id);
+            this.deleteLoading = true;
+            toDoService.deleteToDo(id)
+            .then(() => {
+                this.$emit('item-modified', true);
+                this.deleteLoading = false;
+            })
+            .catch(() => {
+                this.$emit('item-modified', false);
+                this.deleteLoading = false;
+            })
         }
     },
+    emits: ['item-modified'],
     data() {
         return {
             deleteLoading: false,

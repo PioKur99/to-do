@@ -24,7 +24,8 @@ export class AddToDoComponent {
       this.loading = true;
       const newToDo: ToDo = {
         text: this.text,
-        dueDate: this.dueDate
+        dueDate: this.dueDate,
+        done: false
       };
       this.toDoService.createToDo(newToDo).pipe(
         first(), 

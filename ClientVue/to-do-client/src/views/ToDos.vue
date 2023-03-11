@@ -1,18 +1,15 @@
 <template>
-    <HeaderComponent />
-    <div v-if="showAlert" :class="alertType" role="alert">
-        {{alertMessage}}
-    </div>
+    <HeaderComponent @itemAdded="fetchData()" @addClicked="handleAddToDoClicked(value)" />
     <div v-if="loading" class="d-flex justify-content-center">
         <div class="spinner-border" style="width: 3rem; height: 3rem; margin-top: 3rem;" role="status">
         <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <div v-if="!loading" class="data large">
-        <div v-if="!todosData.length" class="alert alert-warning" role="alert">
+    <div v-if="!loading" class="data" :class="{'large': !this.isAddViewVisible, 'medium': this.isAddViewVisible}">
+        <div v-if="!data.length" class="alert alert-warning" role="alert">
             Brak danych!
         </div>
-        <ToDoItem v-for="item in todosData" :key="item.id" :toDo="item" />
+        <ToDoItem v-for="item in data" :key="item.id" :toDo="item" @item-modified="onItemModified"/>
     </div>
 </template>
 
@@ -20,40 +17,38 @@
 import HeaderComponent from '../components/Header.vue'
 import ToDoItem from '../components/ToDoItem.vue'
 import TodoService from '@/services/todo-service'
+import AlertService from '@/services/alert-service';
 const toDoService = new TodoService();
+const alertService = new AlertService();
 export default {
     name: 'ToDosComponent',
     components: { HeaderComponent, ToDoItem },
     data() {
         return {
-            todosData: [],
-            loading: false,
-            isAddAlertVisible: false,
+            data: [],
+            loading: true,
             isAddViewVisible: false,
-            alertMessage: '',
-            alertType: '',
-            showAlert: false
         }
     },
     mounted() {
-        this.getToDos();
+        this.fetchData();
     },
     methods: {
-        handleAddToDoClicked(value) {
-            this.isAddViewVisible = value;
+        handleAddToDoClicked() {
+            this.isAddViewVisible = !this.isAddViewVisible;
         },
-        displayAlert(message, type) {
-            this.alertMessage = message;
-            this.alertType = type;
-            this.showAlert = true;
-            setTimeout(() => {
-            this.showAlert = false
-            }, 2000);
+        onItemModified(success) {
+            if(success) {
+                alertService.open('success', 'Dane zostały zapisane.');
+                this.fetchData();
+            } else {
+                alertService.open('danger', 'Wystąpił błąd!');
+            }
         },
-        getToDos() {
+        fetchData() {
             this.loading = true;
             toDoService.loadToDos().then(response => {
-                this.todosData = response.data;
+                this.data = response.data;
                 this.loading = false;
             })
         }
@@ -79,15 +74,8 @@ export default {
     max-height: 65vh;
 }
 
-.big {
-    max-height: 60vh;
-}
-
 .medium {
     max-height: 45vh;
 }
 
-.small {
-    max-height: 37vh;
-}
 </style>
