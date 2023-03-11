@@ -1,4 +1,4 @@
-<app-header (addClicked)="handleAddToDoClicked($event)" (itemAdded)="fetchData()"></app-header>
+<app-header (addClicked)="handleAddToDoClicked()" (itemAdded)="fetchData()"></app-header>
 <div *ngIf="loading" class="d-flex justify-content-center">
     <div class="spinner-border" style="width: 3rem; height: 3rem; margin-top: 3rem;" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -13,7 +13,7 @@
         <app-to-do-item 
         *ngFor="let item of data" 
         [toDo]="item"
-        (itemModified)="displayAlert($event)"
+        (itemModified)="onItemModified($event)"
         ></app-to-do-item>
     </div>
 </ng-container>

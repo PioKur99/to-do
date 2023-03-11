@@ -7,7 +7,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Output() addClicked: EventEmitter<boolean> = new EventEmitter;
+  @Output() addClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output() itemAdded: EventEmitter<void> = new EventEmitter<void>();
   headerTitle: string = 'Do zrobienia'
   buttonText: string = 'Dodaj'
@@ -16,7 +16,7 @@ export class HeaderComponent {
   handleAddClick() {
     this.showAddView = !this.showAddView;
     this.buttonText = this.showAddView ? 'Anuluj' : 'Dodaj'
-    this.addClicked.emit(this.showAddView)
+    this.addClicked.emit();
   }
 
   handleItemAdded() {

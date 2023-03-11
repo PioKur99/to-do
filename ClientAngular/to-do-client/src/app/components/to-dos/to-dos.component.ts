@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize, first, Observable } from 'rxjs';
-import { Alert } from 'src/app/models/alert-content-model';
+import { finalize, first} from 'rxjs';
 import { ToDo } from 'src/app/models/to-do-model';
 import { AlertService } from 'src/app/services/alert.service';
 import { TodoService } from 'src/app/services/todo.service';
@@ -20,13 +19,17 @@ export class ToDosComponent implements OnInit {
     this.fetchData();
   }
 
-  handleAddToDoClicked(value: boolean) {
-    this.isAddViewVisible = value
+  handleAddToDoClicked() {
+    this.isAddViewVisible = !this.isAddViewVisible;
   }
 
-  displayAlert(alert: Alert) {
-    this.alertService.open(alert.type, alert.message);
-    this.fetchData();
+  onItemModified(success: boolean) {
+    if(success) {
+      this.alertService.open('success', 'Dane zostały zapisane.');
+      this.fetchData();
+    } else {
+        this.alertService.open('danger', 'Wystąpił błąd!');
+      }
   }
 
   fetchData() {

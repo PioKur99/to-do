@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { finalize, first } from 'rxjs';
-import { Alert } from 'src/app/models/alert-content-model';
 import { ToDo } from 'src/app/models/to-do-model';
 import { TodoService } from 'src/app/services/todo.service';
 
@@ -11,7 +10,7 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class ToDoItemComponent {
   @Input() toDo!: ToDo;
-  @Output() itemModified: EventEmitter<Alert> = new EventEmitter<Alert>();
+  @Output() itemModified: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   deleteLoading = false;
   updateLoading = false;
@@ -22,32 +21,32 @@ export class ToDoItemComponent {
   handleCheckBoxClick(value: boolean, id: string | undefined) {
     if(id) {
       this.updateLoading = true;
-      this.toDoService.updateToDo(id, value).pipe(first(), finalize(() => this.updateLoading = false)).subscribe(
-        next => {
-          const alert: Alert = {type: 'success', message: 'Dane zostały zapisane.'}
-          this.itemModified.emit(alert);
+      this.toDoService.updateToDo(id, value).pipe(
+        first(), 
+        finalize(() => this.updateLoading = false)).subscribe({
+        next: () => {
+          this.itemModified.emit(true);
         },
-        error => {
-          const alert: Alert = {type: 'danger', message: 'Wystąpił błąd!'}
-          this.itemModified.emit(alert);
+        error: () => {
+          this.itemModified.emit(false);
         }
-      )
+      })
     }
   }
 
   handleDelete(id: string | undefined) {
     if(id) {
       this.deleteLoading = true;
-      this.toDoService.deleteToDo(id).pipe(first(), finalize(() => this.deleteLoading = false)).subscribe(
-        next => {
-          const alert: Alert = {type: 'success', message: 'Dane zostały zapisane.'}
-          this.itemModified.emit(alert);
+      this.toDoService.deleteToDo(id).pipe(
+        first(), 
+        finalize(() => this.deleteLoading = false)).subscribe({
+        next: () => {
+          this.itemModified.emit(true);
         },
-        error => {
-          const alert: Alert = {type: 'danger', message: 'Wystąpił błąd!'}
-          this.itemModified.emit(alert);
+        error: () => {
+          this.itemModified.emit(false);
         }
-      )
+      })
     }
   }
 }
