@@ -27,7 +27,7 @@ export default {
   name: 'HeaderComponent',
   data() {
     return {
-        headerTitle: 'Do Zrobienia',
+        headerTitle: 'Do zrobienia',
         buttonText: 'Dodaj',
         showAddView: false
     }

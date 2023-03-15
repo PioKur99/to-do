@@ -15,17 +15,6 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
-@keyframes transition {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -47,11 +36,6 @@ body {
   padding: 30px;
   border-radius: 5px;
 }
-
-form, .about, .alert, .todo{
-  animation: transition .5s;
-}
-
 
 .btn {
   padding: 8px 16px;
