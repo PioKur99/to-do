@@ -29,7 +29,7 @@ export class TodoService {
   }
 
   populateData(count: number) {
-    return this.http.get<ToDo[]>(this.API_URL + `/populate/${count}`, {});
+    return this.http.get<ToDo[]>(this.API_URL + `/populate/${count}`);
   }
 
 }
