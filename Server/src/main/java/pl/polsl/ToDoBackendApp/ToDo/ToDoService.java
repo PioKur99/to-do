@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +35,19 @@ public class ToDoService {
             throw new IllegalStateException("Termin wykonania zadania nie może być wcześniejszy niż obecny.");
         }
         toDoRepository.save(item);
+    }
+
+    @PostMapping
+    public void populateData(@RequestBody long count) {
+        toDoRepository.deleteAll();
+        List<ToDo> toDoList = new ArrayList<ToDo>();
+        long counter = 0;
+        while(counter < count) {
+            ToDo mockToDo = new ToDo("Robić Magisterkę", false, LocalDate.of(2023, Month.AUGUST, 3));
+            toDoList.add(mockToDo);
+            counter++;
+        }
+        toDoRepository.saveAll(toDoList);
     }
 
     public void deleteToDo(Long id) {

@@ -7,23 +7,29 @@ import { ToDo } from '../models/to-do-model';
   providedIn: 'root'
 })
 export class TodoService {
+
+  private API_URL: string = "http://localhost:8080/todo"
   
   constructor(private http: HttpClient) { }
 
   loadToDos() {
-    return this.http.get<ToDo[]>("http://localhost:8080/todo");
+    return this.http.get<ToDo[]>(this.API_URL);
   }
 
   createToDo(data: ToDo) {
-    return this.http.post("http://localhost:8080/todo", data);
+    return this.http.post(this.API_URL, data);
   }
 
   deleteToDo(id: string) {
-    return this.http.delete(`http://localhost:8080/todo/${id}`);
+    return this.http.delete(this.API_URL + `/${id}`);
   }
 
   updateToDo(id: string, value: boolean) {
-    return this.http.put(`http://localhost:8080/todo/${id}`, {}, {params: {done: value}});
+    return this.http.put(this.API_URL + `/${id}`, {}, {params: {done: value}});
+  }
+
+  populateData(count: number) {
+    return this.http.post(this.API_URL + `/populate/${count}`, {});
   }
 
 }
