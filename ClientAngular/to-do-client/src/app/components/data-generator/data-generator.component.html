@@ -1,0 +1,16 @@
+<div class="flex">
+    <button (click)="generateClicked()" class="btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span *ngIf="!loading">Wygeneruj dane</span>
+    </button>
+    <div>
+        <label for="populateCount">Ilość rzeczy do zrobienia</label>
+        <input
+        type="text"
+        name="populateCount"
+        [(ngModel)]="populateCount"
+        id="populateCount"
+        class="form-control"
+        />
+    </div>
+</div>

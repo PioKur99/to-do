@@ -26,9 +26,9 @@ public class ToDoController {
     public void registerNewToDo(@RequestBody ToDo item) {
         toDoService.addNewToDo(item);
     }
-    @PostMapping(path = {"/populate/{count}"})
-    public void populateData(@PathVariable("count") Long count) {
-        toDoService.populateData(count);
+    @GetMapping(path = {"/populate/{count}"})
+    public List<ToDo> populateData(@PathVariable("count") Long count) {
+        return toDoService.populateData(count);
     }
     @DeleteMapping(path = "{toDoId}")
     public void deleteToDo(@PathVariable("toDoId") Long id) {

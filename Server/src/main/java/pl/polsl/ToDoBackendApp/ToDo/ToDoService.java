@@ -37,8 +37,7 @@ public class ToDoService {
         toDoRepository.save(item);
     }
 
-    @PostMapping
-    public void populateData(@RequestBody long count) {
+    public List<ToDo> populateData(@RequestBody long count) {
         toDoRepository.deleteAll();
         List<ToDo> toDoList = new ArrayList<ToDo>();
         long counter = 0;
@@ -48,6 +47,7 @@ public class ToDoService {
             counter++;
         }
         toDoRepository.saveAll(toDoList);
+        return toDoList;
     }
 
     public void deleteToDo(Long id) {

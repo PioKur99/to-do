@@ -1,28 +1,14 @@
 .data {
     overflow-y: auto;
-}
-
-.data {
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
-  }
-
-.data::-webkit-scrollbar { 
-    display: none; 
+    overflow-x: hidden;
 }
 
 .large {
-    max-height: 65vh;
-}
-
-.big {
-    max-height: 60vh;
+    min-height: 62vh;
+    max-height: 63vh;
 }
 
 .medium {
-    max-height: 45vh;
-}
-
-.small {
-    max-height: 37vh;
+    min-height: 38vh;
+    max-height: 39vh;
 }

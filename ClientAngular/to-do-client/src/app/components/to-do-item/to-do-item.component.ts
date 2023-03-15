@@ -10,6 +10,7 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class ToDoItemComponent {
   @Input() toDo!: ToDo;
+  @Input() index!: number;
   @Output() itemModified: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   deleteLoading = false;

@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ToDoItemComponent } from './components/to-do-item/to-do-item.component';
 import { ToDosComponent } from './components/to-dos/to-dos.component';
 import { FormsModule } from '@angular/forms';
+import { DataGeneratorComponent } from './components/data-generator/data-generator.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     HeaderComponent,
     ToDoItemComponent,
-    ToDosComponent
+    ToDosComponent,
+    DataGeneratorComponent
   ],
   imports: [
     BrowserModule,

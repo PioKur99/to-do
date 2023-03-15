@@ -11,7 +11,8 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class ToDosComponent implements OnInit {
   data: ToDo[] = [];
-  loading = true;
+  fetchLoading = true;
+  populateLoading = false;
   isAddViewVisible = false;
   constructor(private toDoService: TodoService, private alertService: AlertService) {}
 
@@ -33,10 +34,20 @@ export class ToDosComponent implements OnInit {
   }
 
   fetchData() {
-    this.loading = true;
+    this.fetchLoading = true;
     this.toDoService.loadToDos().pipe(
       first(),
-      finalize(() => this.loading = false)
+      finalize(() => this.fetchLoading = false)
+      ).subscribe(response => {
+        this.data = response;
+    })
+  }
+
+  populateData(count: number) {
+    this.populateLoading = true;
+    this.toDoService.populateData(count).pipe(
+      first(),
+      finalize(() => this.populateLoading = false)
       ).subscribe(response => {
         this.data = response;
     })
