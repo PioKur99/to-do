@@ -53,6 +53,7 @@ export default {
             toDoService.loadToDos().then(response => {
                 this.data = response.data;
                 this.fetchLoading = false;
+                alertService.open('success', 'Dane zostały pobrane.');
             })
         },
         populateData(count) {
@@ -60,6 +61,7 @@ export default {
             toDoService.populateData(count).then(response => {
                 this.data = response.data;
                 this.populateLoading = false;
+                alertService.open('success', 'Dane zostały zapisane.');
             })
         },
     }

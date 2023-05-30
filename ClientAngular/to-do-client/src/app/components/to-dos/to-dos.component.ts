@@ -40,6 +40,7 @@ export class ToDosComponent implements OnInit {
       finalize(() => this.fetchLoading = false)
       ).subscribe(response => {
         this.data = response;
+        this.alertService.open('success', 'Dane zostały pobrane.');
     })
   }
 
@@ -50,6 +51,7 @@ export class ToDosComponent implements OnInit {
       finalize(() => this.populateLoading = false)
       ).subscribe(response => {
         this.data = response;
+        this.alertService.open('success', 'Dane zostały zapisane.');
     })
   }
 }
